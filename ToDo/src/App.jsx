@@ -21,6 +21,8 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  
+  
   const addTodo = () => {
     if (input.trim()) {
       const newTodo = {
@@ -58,20 +60,26 @@ function App() {
           </button>
         </div>
 
-        <div className="flex mb-6">
+        <form
+          className="flex mb-6"
+          onSubmit={e => {
+            e.preventDefault();
+            addTodo();
+          }}
+        >
           <input
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={e => setInput(e.target.value)}
             placeholder="What's on your mind?"
             className="flex-1 p-3 rounded-l-lg bg-white/60 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-white"
           />
           <button
-            onClick={addTodo}
+            type="submit"
             className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-r-lg font-bold"
           >
             Add
           </button>
-        </div>
+        </form>
 
         <div className="flex justify-center mb-4 space-x-2">
           {["all", "active", "completed"].map((f) => (
